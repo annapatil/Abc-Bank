@@ -6,31 +6,30 @@ import java.util.Calendar
 import model.Transaction
 import repository.TransactionRepository
 
-object TransactionManager {
+class TransactionManager( val accountRepo: AccountRepository, val transactionRepo: TransactionRepository ) {
 
-  def deposit(account: Account, amount: Int, memo: String) {
+  def deposit(accountId: String, amount: Int, memo: String) {
     require( amount > 0)
     require( memo != null )
-    require( account != null )
+    require( accountId != null )
     
     val now = Calendar.getInstance.getTime
+    val account = accountRepo.getAccount(accountId)
     val newBalance = account.balance + amount
-    val newAccount = Account(account.accountId,account.accountType,account.customer,newBalance)
-    AccountRepository.updateAccount(newAccount)
+    accountRepo.updateAccountBalance(account.accountId,newBalance)
     val transaction = Transaction(now,DEPOSIT,account,memo,amount,newBalance)
-    TransactionRepository.addTransaction(transaction);
+    transactionRepo.addTransaction(transaction);
   }
 
-  def withDraw( account: Account, amount: Int, memo: String) {
-    require( account != null )
-    require( amount <= account.balance)
+  def withDraw( accountId: String, amount: Int, memo: String) {
+    require( accountId != null )
     require( memo != null )
     
     val now = Calendar.getInstance.getTime
+    val account = accountRepo.getAccount(accountId)
     val newBalance = account.balance + amount
-    val newAccount = Account(account.accountId,account.accountType,account.customer,newBalance)
-    AccountRepository.updateAccount(newAccount)
+    val newAccount = accountRepo.updateAccountBalance(account.accountId,newBalance)
     val transaction = Transaction(now,DEPOSIT,account,memo,amount,newBalance)
-    TransactionRepository.addTransaction(transaction);
+    transactionRepo.addTransaction(transaction);
   }
 }

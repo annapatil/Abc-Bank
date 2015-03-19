@@ -1,18 +1,12 @@
 package repository
-import scala.collection.mutable
-import model.Transaction
+
 import model.Customer
 import model.AccountType._
+import model.Transaction
 
-object TransactionRepository {
+trait TransactionRepository {
 
-  private val transactions = mutable.Set[Transaction]()
-  
-  def getTransactionsForCustomer( cust: Customer, accountType: AccountType) = {
-    ???
-  }
-  
-  def addTransaction( transaction: Transaction ) {
-    ???
-  }
+  def getTransactionsForCustomer( custId: String, accountType: AccountType) : Set[Transaction]
+  def getAllTransactions : Set[Transaction]
+  def addTransaction( transaction: Transaction ) : Unit
 }

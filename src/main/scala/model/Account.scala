@@ -7,6 +7,6 @@ import AccountType._
 /**
  * Account is always associated with a customer
  */
-case class Account(val accountId: Int, val accountType: AccountType, val customer: Customer, val balance: Int )  {
+case class Account(val accountId: String, val accountType: AccountType, val customer: Customer, val balance: Int )  {
   
 }
