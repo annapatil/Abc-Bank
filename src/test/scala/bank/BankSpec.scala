@@ -41,4 +41,26 @@ class BankSpec extends FlatSpec {
     val transactionsMap = cs.transactionMap
     transactionsMap.foreach(x=>x._2.size==1)
   }
+  
+  "CreateCustomerReport" should "work as expected" in {
+    val bank: Bank = new BankImpl("Abc-Bank")
+    //add 10 customers, each with three accounts
+    val custIds = (1 to 10).map(i=>{
+      val cust = bank.addCustomer(s"Cust$i")
+      val ca = bank.openAccount(cust.custId, CHECKING)
+      bank.deposit(ca, 100, "100")
+      val sa = bank.openAccount(cust.custId, SAVINGS)
+      bank.deposit(sa, 100, "100")
+      val msa = bank.openAccount(cust.custId, MAX_SAVINGS)
+      bank.deposit(msa, 100, "100")
+      cust.custId
+    })    
+    val cr = bank.createCustomerReport
+    assert( cr.totalCustomers == 10 )
+    assert( cr.totalAccounts == 30 )
+    cr.custDetails.foreach( cd => {
+      //each customer only has 3 accounts
+      assert( cd.totalAccounts == 3 )
+    })
+  }
 }

@@ -1,7 +1,9 @@
 package reporting.customer
 
+import model.Customer
 
-case class CustomerDetail( val name: String, val totalAccounts: Int) {
+
+case class CustomerDetail( val cust: Customer, val totalAccounts: Int) {
 
 }
 

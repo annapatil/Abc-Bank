@@ -6,6 +6,7 @@ import model.Customer
 import reporting.AccountStatement
 import reporting.customer.CustomerReport
 import reporting.interest.InterestReport
+import reporting.customer.CustomerDetail
 
 class BankImpl(val bankName: String) extends BankBase with Bank {
 
@@ -43,7 +44,11 @@ class BankImpl(val bankName: String) extends BankBase with Bank {
   }
 
   def createCustomerReport: CustomerReport = {
-    CustomerReport(0, 0, null)
+    val allAccounts = accountRepo.getAllAccounts
+    val gyc = allAccounts.groupBy { account => account.customer }
+    val custDetails = gyc.map( x=> CustomerDetail(x._1,x._2.size) ).toSet
+    val totalCustomers = gyc.size
+    CustomerReport(totalCustomers, allAccounts.size, custDetails)
   }
 
   def createInterestReport: InterestReport = {
