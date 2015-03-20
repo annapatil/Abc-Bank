@@ -6,33 +6,33 @@ import java.util.Calendar
 import model.Transaction
 import repository.TransactionRepository
 
-class TransactionManager( val accountRepo: AccountRepository, val transactionRepo: TransactionRepository ) {
+class TransactionManager(val accountRepo: AccountRepository, val transactionRepo: TransactionRepository) {
 
   def deposit(accountId: String, amount: Int, memo: String) {
-    require( amount > 0)
-    require( memo != null )
-    require( accountId != null )
-    
+    require(amount > 0)
+    require(memo != null)
+    require(accountId != null)
+
+    val account = accountRepo.deposit(accountId, amount)
     val now = Calendar.getInstance.getTime
-    val account = accountRepo.getAccount(accountId)
-    val newBalance = account.balance + amount
-    accountRepo.updateAccountBalance(account.accountId,newBalance)
-    val transaction = Transaction(now,DEPOSIT,account,memo,amount,newBalance)
+    val transaction = Transaction(now, DEPOSIT, account, memo, amount, account.balance)
     transactionRepo.addTransaction(transaction);
   }
 
-  def withdraw( accountId: String, amount: Int, memo: String) {
-    require( accountId != null )
-    require( memo != null )
-    
+  def withdraw(accountId: String, amount: Int, memo: String) {
+    require(accountId != null)
+    require(memo != null)
+    require(amount > 0)
+
+    val account = accountRepo.withdraw(accountId, amount)
     val now = Calendar.getInstance.getTime
-    val account = accountRepo.getAccount(accountId)
-    val newBalance = account.balance - amount
-    if( newBalance < 0 ) {
-      throw new Exception(s"Withdrawal amount $amount is more than ${account.balance}")
-    }
-    val newAccount = accountRepo.updateAccountBalance(account.accountId,newBalance)
-    val transaction = Transaction(now,DEPOSIT,account,memo,amount,newBalance)
+    val transaction = Transaction(now, DEPOSIT, account, memo, amount, account.balance)
     transactionRepo.addTransaction(transaction);
   }
+
+  def transfer(fromAccountId: String, toAccountId: String, amount: Int, memo: String) {
+    withdraw(fromAccountId,amount,memo)
+    deposit(toAccountId,amount,memo)
+  }
+
 }

@@ -10,5 +10,6 @@ trait AccountRepository {
   def getAccount( accountId: String) : Account
   def getAllCustomerAccounts( custId: String ) : Set[Account]
   def getAllAccounts: Set[Account]
-  def updateAccountBalance(accountId: String, newBalance: Int) : Account
+  def withdraw(accountId: String, amount: Int) : Account
+  def deposit(accountId: String, amount: Int) : Account
 }

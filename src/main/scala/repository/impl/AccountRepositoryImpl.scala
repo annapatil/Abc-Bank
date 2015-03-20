@@ -12,6 +12,9 @@ class AccountRepositoryImpl extends AccountRepository {
 
   @Override
   def createAccount(customer: Customer, accountType: AccountType): Account = {
+    require(customer!=null)
+    require(accountType!=null)
+
     val now = System.nanoTime.toString
     val accountId = s"${customer.custId}_${accountType.toString()}_${now}"
     val account = Account(accountId, accountType, customer, 0)
@@ -21,6 +24,7 @@ class AccountRepositoryImpl extends AccountRepository {
 
   @Override
   def getAccount(accountId: String): Account = {
+    require(accountId!=null)
     accounts(accountId)
   }
 
@@ -34,6 +38,7 @@ class AccountRepositoryImpl extends AccountRepository {
 
   @Override
   def getAllCustomerAccounts(custId: String): Set[Account] = {
+    require(custId!=null)
     accounts.filter(mapEntry => {
       val (_, account) = mapEntry
       account.customer.custId == custId
@@ -44,10 +49,31 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   @Override
-  def updateAccountBalance(accountId: String, newBalance: Int) = {
+  def withdraw(accountId: String, amount: Int) = {
+    require(amount>0)
+    require(accountId!=null)
+    
     if (accounts.isDefinedAt(accountId)) {
       val oldAccount = accounts(accountId)
-      val newAccount = Account(accountId, oldAccount.accountType, oldAccount.customer, newBalance)
+      if( oldAccount.balance-amount<0) {
+        throw new Exception(s"Withdrawal amount $amount is more than ${oldAccount.balance}")
+      }
+      val newAccount = Account(accountId, oldAccount.accountType, oldAccount.customer, oldAccount.balance-amount)
+      accounts(accountId) = newAccount
+      newAccount
+    } else {
+      throw new NoSuchElementException(s"Account with id ${accountId} does not exists")
+    }
+  }
+
+  @Override
+  def deposit(accountId: String, amount: Int) = {
+    require(amount>0)
+    require(accountId!=null)
+    
+    if (accounts.isDefinedAt(accountId)) {
+      val oldAccount = accounts(accountId)
+      val newAccount = Account(accountId, oldAccount.accountType, oldAccount.customer, oldAccount.balance+amount)
       accounts(accountId) = newAccount
       newAccount
     } else {

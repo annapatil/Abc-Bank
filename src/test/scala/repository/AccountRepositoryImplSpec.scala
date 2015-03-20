@@ -54,15 +54,28 @@ class AccountRepositoryImplSpec extends FlatSpec {
     } )
   }
 
-  "updateAccount" should "work properly under all cirsumstances" in  {
+  "deposit" should "work properly under all cirsumstances" in  {
     val accountRepo: AccountRepository = new AccountRepositoryImpl
     assert(accountRepo.getAllAccounts.size == 0)
     val john = Customer("C1", "John")
     (1 to 15).map ( _=>accountRepo.createAccount(john,CHECKING) )
-    accountRepo.getAllAccounts.foreach ( a => accountRepo.updateAccountBalance(a.accountId, a.balance+100) )
+    accountRepo.getAllAccounts.foreach ( a => accountRepo.deposit(a.accountId, a.balance+100) )
     accountRepo.getAllAccounts.foreach ( account => {
       val balance = account.balance
       assert( balance ==100 )
+    } )
+  }
+
+  "withdraw" should "work properly under all cirsumstances" in  {
+    val accountRepo: AccountRepository = new AccountRepositoryImpl
+    assert(accountRepo.getAllAccounts.size == 0)
+    val john = Customer("C1", "John")
+    (1 to 15).map ( _=>accountRepo.createAccount(john,CHECKING) )
+    accountRepo.getAllAccounts.foreach ( a => accountRepo.deposit(a.accountId, 100) )
+    accountRepo.getAllAccounts.foreach ( a => accountRepo.withdraw(a.accountId, 50) )
+    accountRepo.getAllAccounts.foreach ( account => {
+      val balance = account.balance
+      assert( balance ==50 )
     } )
   }
 }
