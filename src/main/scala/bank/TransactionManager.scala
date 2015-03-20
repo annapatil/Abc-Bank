@@ -21,13 +21,16 @@ class TransactionManager( val accountRepo: AccountRepository, val transactionRep
     transactionRepo.addTransaction(transaction);
   }
 
-  def withDraw( accountId: String, amount: Int, memo: String) {
+  def withdraw( accountId: String, amount: Int, memo: String) {
     require( accountId != null )
     require( memo != null )
     
     val now = Calendar.getInstance.getTime
     val account = accountRepo.getAccount(accountId)
-    val newBalance = account.balance + amount
+    val newBalance = account.balance - amount
+    if( newBalance < 0 ) {
+      throw new Exception(s"Withdrawal amount $amount is more than ${account.balance}")
+    }
     val newAccount = accountRepo.updateAccountBalance(account.accountId,newBalance)
     val transaction = Transaction(now,DEPOSIT,account,memo,amount,newBalance)
     transactionRepo.addTransaction(transaction);

@@ -2,10 +2,9 @@ package reporting
 
 import model.Transaction
 import model.AccountType._
+import model.Account
 
-case class AccountBalance( val accountId: Int, val accoutType:AccountType, val accountBalance: Int) {
 
-}
-case class AccountStatement( val accountBalance: AccountBalance, val transactions: Set[Transaction]) {
+case class AccountStatement( val accounts: Set[Account], val transactionMap: Map[AccountType,Set[Transaction]]) {
 
 }

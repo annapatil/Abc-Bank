@@ -1,12 +1,12 @@
-[0m[[0mdebug[0m] [0mRunning TaskDef(repository.AccountRepositoryImplSpec, org.scalatest.tools.Framework$$anon$1@6feee1e3, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(bank.FlatRateCalculatorSpec, org.scalatest.tools.Framework$$anon$1@6feee1e3, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(bank.RangeBasedCalculatorSpec, org.scalatest.tools.Framework$$anon$1@6feee1e3, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(bank.TransactionManagerSpec, org.scalatest.tools.Framework$$anon$1@6feee1e3, false, [SuiteSelector])[0m
-[0m[[0mdebug[0m] [0mRunning TaskDef(repository.TransactionRepositoryImplSpec, org.scalatest.tools.Framework$$anon$1@6feee1e3, false, [SuiteSelector])[0m
-[0m[[0minfo[0m] [0m[36mRun completed in 538 milliseconds.[0m[0m
-[0m[[0minfo[0m] [0m[36mTotal number of tests run: 7[0m[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(bank.TransactionManagerSpec, org.scalatest.tools.Framework$$anon$1@187885c2, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(bank.RangeBasedCalculatorSpec, org.scalatest.tools.Framework$$anon$1@187885c2, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(repository.TransactionRepositoryImplSpec, org.scalatest.tools.Framework$$anon$1@187885c2, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(bank.FlatRateCalculatorSpec, org.scalatest.tools.Framework$$anon$1@187885c2, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(repository.AccountRepositoryImplSpec, org.scalatest.tools.Framework$$anon$1@187885c2, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0m[36mRun completed in 337 milliseconds.[0m[0m
+[0m[[0minfo[0m] [0m[36mTotal number of tests run: 9[0m[0m
 [0m[[0minfo[0m] [0m[36mSuites: completed 5, aborted 0[0m[0m
-[0m[[0minfo[0m] [0m[36mTests: succeeded 7, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0minfo[0m] [0m[36mTests: succeeded 9, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0minfo[0m] [0m[32mAll tests passed.[0m[0m
 [0m[[0mdebug[0m] [0mPassed tests:[0m
 [0m[[0mdebug[0m] [0m	repository.AccountRepositoryImplSpec[0m

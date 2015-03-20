@@ -1,9 +1,9 @@
 #Successful Tests
-#Thu Mar 19 15:21:51 EDT 2015
-bank.RangeBasedCalculatorSpec=1426792910864
-bank.TransactionManagerSpec=1426792910881
-repository.AccountRepositoryImplSpec=1426792910891
-repository.TransactionRepositoryImplSpec=1426792910907
+#Thu Mar 19 21:07:59 EDT 2015
+bank.RangeBasedCalculatorSpec=1426813679584
+bank.TransactionManagerSpec=1426813679631
+repository.AccountRepositoryImplSpec=1426813679645
+repository.TransactionRepositoryImplSpec=1426813679630
 bank.AccountSpec=1426705911281
 bank.BankSpec=1426705911280
-bank.FlatRateCalculatorSpec=1426792910883
+bank.FlatRateCalculatorSpec=1426813679628

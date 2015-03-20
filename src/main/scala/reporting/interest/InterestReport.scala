@@ -1,5 +1,5 @@
 package reporting.interest
 
-class InterestReport {
+case class InterestReport(x: String) {
 
 }
