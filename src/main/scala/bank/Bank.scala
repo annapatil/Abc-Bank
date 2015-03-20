@@ -15,7 +15,7 @@ trait Bank {
   def deposit(account: Account, amount: Int, memo:String)
   def withdraw(account: Account, amount: Int, memo:String)
   
-  def createCustomerStatement( custId: String) : AccountStatement
+  def createAccountStatement( custId: String) : AccountStatement
   def createCustomerReport: CustomerReport
   def createInterestReport: InterestReport
 }
