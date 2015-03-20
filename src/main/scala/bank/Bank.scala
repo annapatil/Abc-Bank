@@ -9,8 +9,12 @@ import reporting.interest.InterestReport
 
 trait Bank {
 
-  def addCustomer( cust: Customer )
+  def addCustomer( custName: String ) : Customer
   def openAccount( custId: String, accountType: AccountType) : Account
+
+  def deposit(account: Account, amount: Int, memo:String)
+  def withdraw(account: Account, amount: Int, memo:String)
+  
   def createCustomerStatement( custId: String) : AccountStatement
   def createCustomerReport: CustomerReport
   def createInterestReport: InterestReport
